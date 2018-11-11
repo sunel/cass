@@ -5,13 +5,13 @@ const PluginError = require('plugin-error'),
     complier = require('./compiler'),
     path = require('path');
 
-const regen = (options, sync) => through.obj((file, enc, cb) => { // eslint-disable-line consistent-return
+const cass = (options) => through.obj((file, enc, cb) => { // eslint-disable-line consistent-return
     if (file.isNull()) {
         return cb(null, file);
     }
 
     if (file.isStream()) {
-        return cb(new PluginError('regen', 'Currently streaming not supported'));
+        return cb(new PluginError('cass', 'Currently streaming not supported'));
     }
 
     let css = new Map();
@@ -24,7 +24,11 @@ const regen = (options, sync) => through.obj((file, enc, cb) => { // eslint-disa
                     const classNames = attribs.class.split(' ');
 
                     classNames.forEach((name) => {
-                        css.set(name, complier(name));
+                        complier(name, (style) => {
+                            if(style !== null) {
+                                css.set(name, style);
+                            }                            
+                        });                        
                     })
                 }
             },
@@ -38,18 +42,18 @@ const regen = (options, sync) => through.obj((file, enc, cb) => { // eslint-disa
         parser.write(file.contents.toString());
         parser.end();  
     } catch(error) {
-        return cb(new PluginError('regen', error.message));
+        return cb(new PluginError('cass', error.message));
     }      
 });
 
 //////////////////////////////
 // Log errors nicely
 //////////////////////////////
-regen.logError = function logError(error) {
-    const message = new PluginError('regen', error.message).toString();
+cass.logError = function logError(error) {
+    const message = new PluginError('cass', error.message).toString();
     process.stderr.write(`${message}\n`);
     this.emit('end');
 };
 
 
-module.exports = regen;
+module.exports = cass;

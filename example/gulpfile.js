@@ -4,7 +4,7 @@ const gulp = require('gulp'),
     browserSync = require("browser-sync"),
     htmlInjector = require("bs-html-injector"),
     runSequence = require('run-sequence'),
-    regen = require('../'),
+    cass = require('../'),
     del = require('del');
 
 // Start browserSync server
@@ -22,30 +22,30 @@ gulp.task('browserSync', function () {
 });
 
 var onError = function(error) {
-    const logError =  regen.logError.bind(this);
+    const logError =  cass.logError.bind(this);
     logError(error);
     browserSync.notify(error.message);
 };
 
-gulp.task('regen', function () {
+gulp.task('cass', function () {
     return gulp.src('app/*.html') // Gets all files ending with .html in app/ and children dirs
-        .pipe(regen().on('error', onError)) // Passes it through a regen, log errors to console
+        .pipe(cass().on('error', onError)) // Passes it through a cass, log errors to console
         .pipe(gulp.dest('app/css'))
         .pipe(browserSync.stream()); // Outputs it in the css folder
 });
 
-gulp.task('html-reload', ['regen'], function (done) {
+gulp.task('html-reload', ['cass'], function (done) {
     htmlInjector();
     done();
 });
 
 // Watchers
 gulp.task('watch', function () {
-    gulp.watch('app/*.html', ['regen', htmlInjector]);
+    gulp.watch('app/*.html', ['cass', htmlInjector]);
 })
 
 gulp.task('default', function (callback) {
-    runSequence(['regen', 'browserSync'], 'watch',
+    runSequence(['cass', 'browserSync'], 'watch',
         callback
     )
 })

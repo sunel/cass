@@ -1,11 +1,9 @@
 {
-    "name": "@react-module/app",
+    "name": "cass-app",
     "version": "0.0.1",
-    "description": "Modularizing React",
+    "description": "Example cass app",
     "author": "sunel",
     "license": "MIT",
-    "repository": "sunel/react-module",
-    "main": "dist/index.js",
     "engines": {
         "node": ">=8",
         "npm": ">=5"

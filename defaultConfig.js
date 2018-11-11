@@ -1,10 +1,24 @@
 module.exports = {
 
     breakpoints: {
-        'sm': '576px',
-        'md': '768px',
-        'lg': '992px',
-        'xl': '1200px'
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200
+    },
+
+    values: {
+        'sb': 'space-between',
+        'sa': 'space-around',
+        'se': 'space-evenly',
+        'grey-lighter': '#f1f5f8',
+    },
+
+    subs: {
+        mx: ['ml', 'mr'],
+        my: ['mt', 'mb'],
+        px: ['pl', 'pr'],
+        py: ['pt', 'pb']
     },
 
     rules: {
@@ -24,6 +38,9 @@ module.exports = {
         r: 'right',
         o: 'opacity',
         cus: 'cursor',
+        trans: 'transform',
+        apr: 'appearance',
+        z: 'z-index',
 
         ovf: 'overflow',
         ovfx: 'overflow-x',

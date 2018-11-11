@@ -1,10 +1,10 @@
 {
-    "name": "@react-module/app",
+    "name": "@cass-org/cass",
     "version": "0.0.1",
-    "description": "Modularizing React",
+    "description": "Class Style Sheet",
     "author": "sunel",
     "license": "MIT",
-    "repository": "sunel/react-module",
+    "repository": "cass-org/cass",
     "main": "index.js",
     "engines": {
         "node": ">=8",
@@ -17,6 +17,7 @@
         "htmlparser2": "^3.10.0",
         "invariant": "^2.2.4",
         "jss": "^9.8.7",
+        "jss-nested": "^6.0.1",
         "plugin-error": "^1.0.1",
         "replace-ext": "^1.0.0",
         "through2": "^3.0.0"
